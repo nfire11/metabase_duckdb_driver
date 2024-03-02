@@ -42,6 +42,10 @@ jobs:
         run: |
           cd metabase_duckdb_driver && chmod +x build.sh && ./build.sh
 
+      - name: "test"
+        run: |
+          cd /home/runner/work/metabase_duckdb_driver/metabase_duckdb_driver/metabase_duckdb_driver/target/jar && ls
+
       - name: Upload resulting jar file
         uses: actions/upload-artifact@v2
         with:
