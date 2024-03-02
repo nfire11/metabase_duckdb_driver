@@ -40,7 +40,7 @@ jobs:
 
       - name: "Run build.sh"
         run: |
-          cd metabase_duckdb_driver && ./build.sh
+          cd metabase-duckdb-driver && ./build.sh
 
       - name: Upload resulting jar file
         uses: actions/upload-artifact@v2
