@@ -46,4 +46,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: duckdb.metabase-driver.jar
-          path: metabase-duckdb-driver/target/duckdb.metabase-driver.jar
+          path: metabase_duckdb_driver/target/duckdb.metabase-driver.jar
