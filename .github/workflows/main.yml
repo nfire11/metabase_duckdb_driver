@@ -23,7 +23,7 @@ jobs:
       - name: "Checkout Driver"
         uses: actions/checkout@v2
         with:
-          path: metabase-duckdb-driver
+          path: metabase_duckdb_driver
 
       - name: Prepare java
         uses: actions/setup-java@v2
@@ -40,7 +40,7 @@ jobs:
 
       - name: "Run build.sh"
         run: |
-          cd metabase-duckdb-driver && bash ./build.sh
+          cd metabase_duckdb_driver && bash ./build.sh
 
       - name: Upload resulting jar file
         uses: actions/upload-artifact@v2
