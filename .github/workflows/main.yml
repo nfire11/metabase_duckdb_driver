@@ -40,7 +40,7 @@ jobs:
 
       - name: "test"
         run: |
-          mv ./metabase_duckdb_driver/src/metabase/driver/duckdb.clj ./metabase/driver/duckdb.clj
+          ls && mv ./metabase_duckdb_driver/src/metabase/driver/duckdb.clj ./metabase/driver/duckdb.clj
 
 
       - name: "Run build.sh"
