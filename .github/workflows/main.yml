@@ -44,7 +44,7 @@ jobs:
 
       - name: "test"
         run: |
-          cd /home/runner/work/metabase_duckdb_driver/metabase_duckdb_driver/metabase_duckdb_driver/target/jar/metabase/driver && ls
+          cd /home/runner/work/metabase_duckdb_driver/metabase_duckdb_driver/metabase/modules/drivers/duckdb/src && ls
 
       - name: Upload resulting jar file
         uses: actions/upload-artifact@v2
