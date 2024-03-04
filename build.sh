@@ -5,12 +5,11 @@ DRIVER_PATH=$(pwd)
 cd ../metabase
 
 clojure \
-  -Sdeps '{:aliases
- {:build
-  {:extra-deps {metabase/metabase-core {:local/root "../metabase"}
-                metabase/build-drivers {:local/root "../metabase/bin/build-drivers"}}}}}'  \
+  -Sdeps '{ :aliases {:duckdb { :extra-deps {org.duckdb/duckdb_jdbc {:mvn/version "0.10.0"} metabase/metabase-core {:local/root "../metabase"}
+ metabase/build-drivers {:local/root "../metabase/bin/build-drivers"}}  com.metabase/duckdb-driver {:local/root "'${DRIVER_PATH}'"} }}}'  \
   -X:build:duckdb \
   build-drivers.build-driver/build-driver! \
   "{:driver :duckdb, :project-dir \"${DRIVER_PATH}\", :target-dir \"${DRIVER_PATH}/target\"}"
- 
+
+
 cd "${DRIVER_PATH}"
