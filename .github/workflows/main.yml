@@ -40,7 +40,7 @@ jobs:
 
       - name: "test"
         run: |
-          ls && cd ./metabase/src && ls
+          ls && cd ./metabase/src/metabase/ && ls
 
 
       - name: "Run build.sh"
