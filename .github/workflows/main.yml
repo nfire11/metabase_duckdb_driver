@@ -1,0 +1,54 @@
+name: Build connector
+
+on:
+  workflow_dispatch:
+    inputs:
+      metabase-version:
+        required: true
+        description: Metabase version to compile with
+        type: string
+        default: v0.48.7
+
+jobs:
+  build-connector:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Metabase Code"
+        uses: actions/checkout@v2
+        with:
+          repository: metabase/metabase
+          ref: ${{ github.event.inputs.metabase-version }}
+          path: metabase
+
+      - name: "Checkout Driver"
+        uses: actions/checkout@v2
+        with:
+          path: metabase_duckdb_driver
+
+      - name: Prepare java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install clojure tools
+        uses: DeLaGuardo/setup-clojure@3.7
+        if: steps.cache-metabase-jar.outputs.cache-hit != 'true'
+        with:
+          # Install just one or all simultaneously
+          cli: 'latest' # Clojure CLI based on tools.deps
+
+      - name: "test"
+        run: |
+          cp  ./metabase_duckdb_driver/src/metabase/driver/duckdb.clj ./metabase/src/metabase/driver/duckdb.clj
+
+
+      - name: "Run build.sh"
+        run: |
+          cd metabase_duckdb_driver && chmod +x build.sh && ./build.sh
+
+      - name: Upload resulting jar file
+        uses: actions/upload-artifact@v2
+        with:
+          name: duckdb.metabase-driver.jar
+          path: /home/runner/work/metabase_duckdb_driver/metabase_duckdb_driver/metabase_duckdb_driver/target/duckdb.metabase-driver.jar

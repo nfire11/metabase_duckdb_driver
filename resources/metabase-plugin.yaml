@@ -19,6 +19,10 @@ driver:
       display-name: Establish a read-only connection
       default: false
       type: boolean
+    - name: additional_options
+      display-name: Additional JDBC options
+      placeholder: /
+      required: false
 init:
   - step: load-namespace
     namespace: metabase.driver.duckdb
